@@ -16,6 +16,7 @@ import { ObjectName } from './object/ObjectName';
 
 import { TreeView } from './tree-view/TreeView';
 import { TreeNode } from './tree-view/TreeNode';
+import { TSDOMNodePreview } from './dom-inspector/TSDOMNodePreview';
 
 interface TableInspectorProps extends ComponentProps<typeof TableInspector> {
   table: true;
@@ -36,6 +37,7 @@ const Inspector: FC<TableInspectorProps | ObjectInspectorProps> = ({ table = fal
 
 export {
   DOMNodePreview,
+  TSDOMNodePreview,
   Inspector,
   ObjectInspector,
   ObjectLabel,

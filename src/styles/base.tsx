@@ -36,6 +36,38 @@ export const createTheme = (theme: any) => ({
     htmlDoctype: {
       color: theme.HTML_DOCTYPE_COLOR,
     },
+    storeButton: {
+      color: 'green',
+      border: 'none',
+      cursor: 'pointer',
+    },
+    floatButtons: {
+      float: 'right', 
+      display: 'flex',
+      position: 'absolute',
+      right: '0',
+      top: '0',
+      backgroundColor: '#F1F4F6',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      height: "100%"
+    },
+    floatButtonsWrap: {
+      width: '350px'
+    },
+    base : { 
+      textWrap: 'wrap',
+      wordBreak: 'break-all',
+      width: '98%', 
+      display: 'inline-flex',
+      fontSize: '12px',
+      position: 'relative',
+      alignItems: 'center',
+      padding: "7px 0px",
+      ':hover': {
+        backgroundColor: '#F1F4F6'
+      }
+    }
   },
 
   ObjectPreview: {
