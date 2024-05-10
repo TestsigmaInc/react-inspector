@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useLayoutEffect, useState, memo } from 'react';
+import React, { useContext, useCallback, useLayoutEffect, useState, memo, useEffect } from 'react';
 import { ExpandedPathsContext } from './ExpandedPathsContext';
 import { TreeNode } from './TreeNode';
 import { DEFAULT_ROOT_PATH, hasChildNodes, getExpandedPaths } from './pathUtils';
@@ -6,7 +6,7 @@ import { DEFAULT_ROOT_PATH, hasChildNodes, getExpandedPaths } from './pathUtils'
 import { useStyles } from '../styles';
 
 const ConnectedTreeNode = memo<any>((props) => {
-  const { data, dataIterator, path, depth, nodeRenderer } = props;
+  const { data, dataIterator, path, depth, nodeRenderer, expandTree } = props;
   const [expandedPaths, setExpandedPaths] = useContext(ExpandedPathsContext);
   const nodeHasChildNodes = hasChildNodes(data, dataIterator);
   const expanded = !!expandedPaths[path];
@@ -20,6 +20,13 @@ const ConnectedTreeNode = memo<any>((props) => {
       })),
     [nodeHasChildNodes, setExpandedPaths, path, expanded]
   );
+
+  useEffect(() => { 
+    setExpandedPaths((prevExpandedPaths) => ({
+      ...prevExpandedPaths,
+      [path]: expandTree
+    }))
+  }, [expandTree])
 
   return (
     <TreeNode
@@ -45,6 +52,7 @@ const ConnectedTreeNode = memo<any>((props) => {
                   key={name}
                   dataIterator={dataIterator}
                   nodeRenderer={nodeRenderer}
+                  expandTree={expandTree}
                   {...renderNodeProps}
                 />
               );
@@ -64,7 +72,7 @@ const ConnectedTreeNode = memo<any>((props) => {
 //   nodeRenderer: PropTypes.func,
 // };
 
-export const TreeView = memo<any>(({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel }) => {
+export const TreeView = memo<any>(({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel, expandTree }) => {
   const styles = useStyles('TreeView');
   const stateAndSetter = useState({});
   const [, setExpandedPaths] = stateAndSetter;
@@ -87,6 +95,7 @@ export const TreeView = memo<any>(({ name, data, dataIterator, nodeRenderer, exp
           depth={0}
           path={DEFAULT_ROOT_PATH}
           nodeRenderer={nodeRenderer}
+          expandTree={expandTree}
         />
       </ol>
     </ExpandedPathsContext.Provider>

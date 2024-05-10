@@ -39,7 +39,7 @@ const domIterator = function* (data: any) {
 };
 
 const DOMInspector: FC<any> = (props) => {
-  return <TreeView nodeRenderer={DOMNodePreview} dataIterator={domIterator} {...props} />;
+  return <TreeView nodeRenderer={props.nodeRenderer} expandTree={props.expandTree} dataIterator={domIterator} {...props} />;
 };
 
 // DOMInspector.propTypes = {
