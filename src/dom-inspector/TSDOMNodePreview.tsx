@@ -1,4 +1,4 @@
-import React, { FC, ReactChild, useState } from 'react';
+import React, { FC, ReactChild, ReactNode, useState } from 'react';
 
 import { useStyles } from '../styles';
 import { shouldInline } from './shouldInline';
@@ -45,8 +45,8 @@ const CloseTag = ({ tagName, isChildNode = false, styles }) => (
 interface TSActionButtonsProps {
     data,
     styles,
-    floatDropDownButtons: (selectionItems, data) => void,
-    floatButtons: (data) => void;
+    floatDropDownButtons: (selectionItems, data) => ReactNode,
+    floatButtons: (data) => ReactNode;
 }
 
 const TSActionButtons = ({data, styles, floatDropDownButtons, floatButtons}: TSActionButtonsProps) => {
