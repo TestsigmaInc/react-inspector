@@ -1,5 +1,5 @@
 {
-  "name": "@testsigma/react-inspector",
+  "name": "@testsigmainc/react-inspector",
   "version": "6.0.2",
   "description": "Power of Browser DevTools inspectors right inside your React app",
   "keywords": [
@@ -20,6 +20,9 @@
     "ui",
     "view"
   ],
+  "publishConfig": {
+    "@testsigmainc:registry": "https://npm.pkg.github.com"
+  },
   "homepage": "https://github.com/xyc/react-inspector",
   "bugs": {
     "url": "https://github.com/xyc/react-inspector/issues"
