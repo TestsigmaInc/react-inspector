@@ -17,7 +17,7 @@ const domIterator = function* (data: any) {
     for (let i = 0; i < data.childNodes.length; i++) {
       const node = data.childNodes[i];
 
-      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length === 0) continue;
+      if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim().length === 0) continue;
 
       yield {
         name: `${node.tagName}[${i}]`,
@@ -38,8 +38,8 @@ const domIterator = function* (data: any) {
   }
 };
 
-const DOMInspector: FC<any> = (props) => {
-  return <TreeView nodeRenderer={props.nodeRenderer} expandTree={props.expandTree} dataIterator={domIterator} {...props} />;
+const DOMInspector: FC<any> = ({ nodeRenderer = DOMNodePreview, expandTree, ...props }) => {
+  return <TreeView nodeRenderer={nodeRenderer} expandTree={expandTree} dataIterator={domIterator} {...props} />;
 };
 
 // DOMInspector.propTypes = {
