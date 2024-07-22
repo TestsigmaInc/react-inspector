@@ -22,6 +22,7 @@ const ConnectedTreeNode = memo<any>((props) => {
   );
 
   useEffect(() => {
+    if (!expandTree) return;
     setExpandedPaths((prevExpandedPaths) => ({
       ...prevExpandedPaths,
       [path]: expandTree,
