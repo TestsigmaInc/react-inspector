@@ -1,56 +1,10 @@
-import React, { FC, ReactChild } from 'react';
+import React, { FC } from 'react';
 
 import { useStyles } from '../styles';
 import { shouldInline } from './shouldInline';
-
-const OpenTag: FC<any> = ({ tagName, attributes, styles }) => {
-  return (
-    <span style={styles.base}>
-      {'<'}
-      <span style={styles.tagName}>{tagName}</span>
-
-      {(() => {
-        if (attributes) {
-          const attributeNodes: ReactChild[] = [];
-          for (let i = 0; i < attributes.length; i++) {
-            const attribute = attributes[i];
-            attributeNodes.push(
-              <span key={i}>
-                {' '}
-                <span style={styles.htmlAttributeName}>{attribute.name}</span>
-                {'="'}
-                <span style={styles.htmlAttributeValue}>{attribute.value}</span>
-                {'"'}
-              </span>
-            );
-          }
-          return attributeNodes;
-        }
-      })()}
-
-      {'>'}
-    </span>
-  );
-};
-
-// isChildNode style={{ marginLeft: -12 /* hack: offset placeholder */ }}
-const CloseTag = ({ tagName, isChildNode = false, styles }) => (
-  <span style={Object.assign({}, styles.base, isChildNode && styles.offsetLeft)}>
-    {'</'}
-    <span style={styles.tagName}>{tagName}</span>
-    {'>'}
-  </span>
-);
-
-const nameByNodeType = {
-  1: 'ELEMENT_NODE',
-  3: 'TEXT_NODE',
-  7: 'PROCESSING_INSTRUCTION_NODE',
-  8: 'COMMENT_NODE',
-  9: 'DOCUMENT_NODE',
-  10: 'DOCUMENT_TYPE_NODE', // http://stackoverflow.com/questions/6088972/get-doctype-of-an-html-as-string-with-javascript
-  11: 'DOCUMENT_FRAGMENT_NODE',
-};
+import { CloseTag } from './CloseTag';
+import { OpenTag } from './OpenTag';
+import { nameByNodeType } from './constants';
 
 export const DOMNodePreview: FC<any> = ({ isCloseTag, data, expanded }) => {
   const styles = useStyles('DOMNodePreview');

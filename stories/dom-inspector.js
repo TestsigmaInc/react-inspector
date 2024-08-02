@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Inspector } from '../src';
+import { deserializeLocatorTree } from '@testsigmainc/locator-tree';
+import { Inspector, TSDOMNodePreview, LocatableNodePreview, DOMInspector } from '../src';
+import { googleHomePage } from './locator-tree-data';
 
 storiesOf('DOM Node', module)
   // ELEMENT_NODE
@@ -24,6 +26,11 @@ storiesOf('DOM Node', module)
     span.textContent = 'hello';
     div.appendChild(span);
     return <Inspector data={div} />;
+  })
+  .add('Element Node: TSDomNode', () => <Inspector data={document.body} nodeRenderer={TSDOMNodePreview} />)
+  .add('Element Node: LocatableNode', () => {
+    const locatorTree = deserializeLocatorTree(JSON.stringify(googleHomePage));
+    return <DOMInspector data={locatorTree} nodeRenderer={LocatableNodePreview} expandLevel={100} />;
   })
   // COMMENT_NODE
   .add('Comment Node', () => <Inspector data={document.createComment('this is a comment')} />)
