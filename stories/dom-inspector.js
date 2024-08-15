@@ -48,6 +48,9 @@ storiesOf('DOM Node', module)
   })
   // DOCUMENT_NODE
   .add('Document Node', () => <Inspector expandLevel={2} data={document} />)
+  .add('Document Node - highlighted node', () => (
+    <Inspector expandLevel={100} data={document} highlightedNode={document.querySelector('#root')} />
+  ))
   // DOCUMENT_FRAGMENT_NODE
   // https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
   // x-tags http://blog.vjeux.com/2013/javascript/custom-components-react-x-tags.html

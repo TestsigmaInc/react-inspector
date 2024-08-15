@@ -42,7 +42,7 @@ export const createTheme = (theme: any) => ({
       cursor: 'pointer',
     },
     floatButtons: {
-      float: 'right', 
+      float: 'right',
       display: 'flex',
       position: 'absolute',
       right: '0',
@@ -50,24 +50,24 @@ export const createTheme = (theme: any) => ({
       backgroundColor: '#F1F4F6',
       paddingLeft: '15px',
       paddingRight: '15px',
-      height: "100%"
+      height: '100%',
     },
     floatButtonsWrap: {
-      width: '350px'
+      width: '350px',
     },
-    base : { 
+    base: {
       textWrap: 'wrap',
       wordBreak: 'break-all',
-      width: '98%', 
+      width: '98%',
       display: 'inline-flex',
       fontSize: '12px',
       position: 'relative',
       alignItems: 'center',
-      padding: "7px 0px",
+      padding: '7px 0px',
       ':hover': {
-        backgroundColor: '#F1F4F6'
-      }
-    }
+        backgroundColor: '#F1F4F6',
+      },
+    },
   },
 
   ObjectPreview: {
@@ -132,7 +132,7 @@ export const createTheme = (theme: any) => ({
   TreeNode: {
     treeNodeBase: {
       color: theme.BASE_COLOR,
-      backgroundColor: theme.BASE_BACKGROUND_COLOR,
+      // backgroundColor: theme.BASE_BACKGROUND_COLOR,
 
       lineHeight: theme.TREENODE_LINE_HEIGHT,
       cursor: 'default',

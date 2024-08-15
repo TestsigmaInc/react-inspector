@@ -54,6 +54,7 @@ const ConnectedTreeNode = memo<any>((props) => {
                   dataIterator={dataIterator}
                   nodeRenderer={nodeRenderer}
                   expandTree={expandTree}
+                  highlightedNode={props.highlightedNode}
                   {...renderNodeProps}
                 />
               );
@@ -74,7 +75,7 @@ const ConnectedTreeNode = memo<any>((props) => {
 // };
 
 export const TreeView = memo<any>(
-  ({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel, expandTree }) => {
+  ({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel, expandTree, highlightedNode }) => {
     const styles = useStyles('TreeView');
     const stateAndSetter = useState({});
     const [, setExpandedPaths] = stateAndSetter;
@@ -96,6 +97,7 @@ export const TreeView = memo<any>(
             path={DEFAULT_ROOT_PATH}
             nodeRenderer={nodeRenderer}
             expandTree={expandTree}
+            highlightedNode={highlightedNode}
           />
         </ol>
       </ExpandedPathsContext.Provider>
