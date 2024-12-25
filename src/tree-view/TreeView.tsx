@@ -22,6 +22,7 @@ const ConnectedTreeNode = memo<any>((props) => {
   );
 
   useEffect(() => {
+    if (!expandTree) return;
     setExpandedPaths((prevExpandedPaths) => ({
       ...prevExpandedPaths,
       [path]: expandTree,
@@ -30,7 +31,7 @@ const ConnectedTreeNode = memo<any>((props) => {
 
   return (
     <TreeNode
-      expanded={expanded}
+      expanded={expandTree}
       onClick={handleClick}
       // show arrow anyway even if not expanded and not rendering children
       shouldShowArrow={nodeHasChildNodes}
