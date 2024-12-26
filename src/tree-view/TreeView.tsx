@@ -21,17 +21,6 @@ const ConnectedTreeNode = memo<any>((props) => {
     [nodeHasChildNodes, setExpandedPaths, path, expanded]
   );
 
-<<<<<<< Updated upstream
-  useEffect(() => {
-    if (!expandTree) return;
-    setExpandedPaths((prevExpandedPaths) => ({
-      ...prevExpandedPaths,
-      [path]: expandTree,
-    }));
-  }, [expandTree]);
-
-=======
->>>>>>> Stashed changes
   return (
     <TreeNode
       expanded={expanded}
