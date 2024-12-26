@@ -61,8 +61,7 @@
     "prerelease": "npm run lint && npm run test && npm run build",
     "release": "npm publish . --access public",
     "storybook": "start-storybook -p 9001",
-    "test": "jest src",
-    "link:dev": "npm link ../locator-tree"
+    "test": "jest src"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
