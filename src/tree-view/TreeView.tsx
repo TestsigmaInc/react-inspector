@@ -6,7 +6,7 @@ import { DEFAULT_ROOT_PATH, hasChildNodes, getExpandedPaths } from './pathUtils'
 import { useStyles } from '../styles';
 
 const ConnectedTreeNode = memo<any>((props) => {
-  const { data, dataIterator, path, depth, nodeRenderer, expandTree } = props;
+  const { data, dataIterator, path, depth, nodeRenderer } = props;
   const [expandedPaths, setExpandedPaths] = useContext(ExpandedPathsContext);
   const nodeHasChildNodes = hasChildNodes(data, dataIterator);
   const expanded = !!expandedPaths[path];
@@ -20,14 +20,6 @@ const ConnectedTreeNode = memo<any>((props) => {
       })),
     [nodeHasChildNodes, setExpandedPaths, path, expanded]
   );
-
-  useEffect(() => {
-    if (!expandTree) return;
-    setExpandedPaths((prevExpandedPaths) => ({
-      ...prevExpandedPaths,
-      [path]: expandTree,
-    }));
-  }, [expandTree]);
 
   return (
     <TreeNode
@@ -53,7 +45,6 @@ const ConnectedTreeNode = memo<any>((props) => {
                   key={name}
                   dataIterator={dataIterator}
                   nodeRenderer={nodeRenderer}
-                  expandTree={expandTree}
                   highlightedNode={props.highlightedNode}
                   {...renderNodeProps}
                 />
@@ -75,15 +66,13 @@ const ConnectedTreeNode = memo<any>((props) => {
 // };
 
 export const TreeView = memo<any>(
-  ({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel, expandTree, highlightedNode }) => {
+  ({ name, data, dataIterator, nodeRenderer, expandPaths, expandLevel, highlightedNode }) => {
     const styles = useStyles('TreeView');
     const stateAndSetter = useState({});
     const [, setExpandedPaths] = stateAndSetter;
 
     useLayoutEffect(() => {
-      setExpandedPaths((prevExpandedPaths) =>
-        getExpandedPaths(data, dataIterator, expandPaths, expandLevel, prevExpandedPaths)
-      );
+      setExpandedPaths(() => getExpandedPaths(data, dataIterator, expandPaths, expandLevel, {}));
     }, [data, dataIterator, expandPaths, expandLevel]);
 
     return (
@@ -96,7 +85,6 @@ export const TreeView = memo<any>(
             depth={0}
             path={DEFAULT_ROOT_PATH}
             nodeRenderer={nodeRenderer}
-            expandTree={expandTree}
             highlightedNode={highlightedNode}
           />
         </ol>

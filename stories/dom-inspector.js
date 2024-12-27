@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { deserializeLocatorTree } from '@testsigmainc/locator-tree';
-import { Inspector, TSDOMNodePreview, LocatableNodePreview, DOMInspector } from '../src';
-import { googleHomePage } from './locator-tree-data';
+import { Inspector, TSDOMNodePreview } from '../src';
 
 storiesOf('DOM Node', module)
   // ELEMENT_NODE
@@ -28,10 +26,6 @@ storiesOf('DOM Node', module)
     return <Inspector data={div} />;
   })
   .add('Element Node: TSDomNode', () => <Inspector data={document.body} nodeRenderer={TSDOMNodePreview} />)
-  .add('Element Node: LocatableNode', () => {
-    const locatorTree = deserializeLocatorTree(JSON.stringify(googleHomePage));
-    return <DOMInspector data={locatorTree} nodeRenderer={LocatableNodePreview} expandLevel={100} />;
-  })
   // COMMENT_NODE
   .add('Comment Node', () => <Inspector data={document.createComment('this is a comment')} />)
   // TEXT_NODE
@@ -51,6 +45,15 @@ storiesOf('DOM Node', module)
   .add('Document Node - highlighted node', () => (
     <Inspector expandLevel={100} data={document} highlightedNode={document.querySelector('#root')} />
   ))
+  .add('Expand all & collapse all', () => {
+    const [expandTree, setExpandTree] = useState(false);
+    return (
+      <>
+        <button onClick={() => setExpandTree(!expandTree)}>{expandTree ? 'Collapse All' : 'Expand All'}</button>
+        <Inspector expandLevel={expandTree ? 100 : 0} data={document} />
+      </>
+    );
+  })
   // DOCUMENT_FRAGMENT_NODE
   // https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
   // x-tags http://blog.vjeux.com/2013/javascript/custom-components-react-x-tags.html
